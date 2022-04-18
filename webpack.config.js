@@ -1,7 +1,9 @@
 const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+let devMode = true;
 module.exports = {
-  mode: "production",
+  mode: devMode ? "development" : "production",
   entry: "./src/assets/js/main.js",
   output: {
     filename: "bundle.[contenthash].js",
@@ -47,6 +49,16 @@ module.exports = {
       title: "Webpack",
       filename: "index.html",
       template: "src/main.html",
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src/assets/js/thirtyparty.js"),
+          to({ context, absoluteFilename }) {
+            return Promise.resolve("assets/js/[name][ext]");
+          },
+        },
+      ],
     }),
   ],
 };

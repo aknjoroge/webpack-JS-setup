@@ -23,3 +23,5 @@
 ### 9. @babel/core - Babel compiler code
 
 ### 10. @babel/preset-env - syntax transformation package
+
+### 11. copy-webpack-plugin - load third party files info the dist folder
